@@ -1,0 +1,29 @@
+.PooCard {
+    min-height:80px;
+    margin-top:10px;
+  
+    margin-left:20px;
+    display:flex;
+    flex-direction: column;
+    background-color: white;
+    z-index:1;
+    border:1px solid rgb(220, 209, 209);
+    border-radius:20px;
+    margin:20px 160px;
+    padding:10px;
+    box-shadow: 0px 10px 27px -5px #777777;
+}
+.username {
+    font-size:15px;
+    font-weight:bold;
+    margin:0;
+}
+
+.Contents {
+    margin:0;
+    font-size:20px;
+}
+
+.ANGRY {
+    height: 20px;;
+}

@@ -1,0 +1,59 @@
+.LoginScreen {
+    background-color:black;
+    height:100vh;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    padding-top:5%;
+}
+
+.LoginContainer {
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+.LoginContainer h1, h2 {
+    color:white;
+    margin:0;
+    /*text-shadow: -4px 3px 8px rgba(128,114,114,0.73);
+    */
+    text-shadow: 1px 11px 9px rgba(123,118,118,0.73);
+    }
+
+h2 {
+    font-size:100px;
+    text-align: center;
+    margin:0;
+}
+
+h1 {
+    font-size:140px;
+    margin:0;
+}
+
+.MPOOP {
+    font-size:190px;
+    text-shadow: -4px 3px 8px rgba(128,114,114,0.73);
+}
+
+.login-button {
+    height:150px;
+    width:500px;
+    margin-top:40px;
+    border:none;
+    border-radius:30px;
+    font-size:80px;
+    font-weight: bold;
+    color:white;
+    background-color: rgb(179, 95, 71);
+    box-shadow: 0px 17px 25px -5px #777777;
+}
+
+.login-button:hover {
+    cursor: pointer;
+    transform:translateY(30px);
+    box-shadow: 0px 17px 25px -5px rgb(179, 95, 71);
+    background-color: white;
+    color:rgb(179, 95, 71);
+}

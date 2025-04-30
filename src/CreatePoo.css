@@ -1,0 +1,54 @@
+.Createpoo {
+    background-color: white;
+    height:100px;
+    width:100px;
+    z-index:20;
+    position:absolute;
+    top:6%;
+    left:30%;
+    width:300px;
+    height:330px;
+    display: flex;
+    flex-direction: row;
+    padding:10px;
+    box-shadow: 5px 30px 46px 16px rgb(179, 95, 71);
+}
+
+textarea {
+    width:90%;
+    height:100%;
+    border:none;
+    outline:none;
+}
+
+
+
+.add-button {
+    margin-top:250px;
+    padding:20px;
+    border:none;
+    border-radius:20px;
+    background-color: rgb(172, 146, 138);
+}
+
+.add-button svg {
+    height:20px;
+    color:rgb(210, 42, 42);
+}
+
+
+
+.add-button svg:hover {
+    height:40px;
+    color:rgb(179, 95, 71);
+    transition: all 0.2s;
+}
+
+.add-button svg:active {
+    color:black;
+    transition: all 0.3s;
+}
+
+
+
+
