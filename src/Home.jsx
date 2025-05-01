@@ -21,6 +21,10 @@ export const Home = () => {
     const [showPoo, setShowPoo] = useState([]);
 
 
+
+
+
+
     const [nowMode, setMode] = useState(0);
 
     const navigate = useNavigate();
@@ -39,16 +43,34 @@ export const Home = () => {
         const alldata = (data.docs.map((doc) => ({...doc.data(), id:doc.id})));
         alldata.sort((a, b) => b.Time-a.Time);
         setAllPoo(alldata);
-        setAllPoo(alldata);
         setShowPoo(alldata);
     }
 
     getPoo();
-    onSnapshot(collection(db, "poops"), (data) => {
+    onSnapshot(
+        collection(db, "poops"), (data) => {
         data.docChanges().map((x) => {
             if (x.type == "added") {
-                console.log(x.doc.data());
-                setAllPoo((dt) => {return [x.doc.data(), ...dt]})
+                console.log("ADDED", x.doc.data());
+
+                const news = [x.doc.data(), ...allPoo].sort((a, b) => b.Time-a.Time);
+               
+                setAllPoo((dt) => {
+
+                    const filtering = dt.filter((obj) => {
+                        //console.log("COMP " + obj.Poo + " " + x.doc.data().Poo);
+                        if (obj.Time != x.doc.data().Time) {
+                            return obj;
+                        }
+                    }
+                    );
+                    console.log("CHCHCH ");
+                    console.log(dt[0]);
+                    console.log(x.doc.data())
+                    console.log(dt[0].Time == x.doc.data().Time);
+                    const news = [x.doc.data(), ...filtering].sort((a, b) => b.Time-a.Time);
+                    return news;
+                });
             }
         })
     });
@@ -56,6 +78,7 @@ export const Home = () => {
     }, []);
 
     useEffect(() => {
+        console.log("CH " + allPoo.length);
         const now_all = [...allPoo];
         if (nowMode == 0) {
             setShowPoo(now_all);
@@ -67,6 +90,10 @@ export const Home = () => {
             }
         })
         setShowPoo(new_all);
+        console.log("SHOW ");
+        allPoo.map((x) =>  {
+            console.log(x);
+        });
         
     }, [nowMode, allPoo]);
 
