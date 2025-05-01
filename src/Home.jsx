@@ -14,11 +14,17 @@ import { PooCard } from "./PooCard";
 
 
 
+
 export const Home = () => {
+
+
 
     const [allPoo, setAllPoo] = useState([]);
 
     const [showPoo, setShowPoo] = useState([]);
+
+
+    const [superunko, setSuperUnko] = useState((<span className="unkos">💩</span>));
 
 
 
@@ -64,10 +70,6 @@ export const Home = () => {
                         }
                     }
                     );
-                    console.log("CHCHCH ");
-                    console.log(dt[0]);
-                    console.log(x.doc.data())
-                    console.log(dt[0].Time == x.doc.data().Time);
                     const news = [x.doc.data(), ...filtering].sort((a, b) => b.Time-a.Time);
                     return news;
                 });
@@ -125,7 +127,9 @@ export const Home = () => {
 
     const SUPERUNKO = () => {
         PooPost("排便成功💩✌")
-        alert("おめでとう！！！")
+        const text = "💩";
+        console.log(text.split(""));
+        setSuperUnko((<span className="unkos_super">💩</span>));
     }
 
 
@@ -157,7 +161,7 @@ export const Home = () => {
 
                 
                 <div className="Titles">
-                {UNKOS}{UNKOS}{UNKOS}
+                {superunko}{superunko}{superunko}
                 </div>
                 <div className="PoopContainer">
                     {(showPoo).map((obj) => {

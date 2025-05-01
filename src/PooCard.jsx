@@ -18,6 +18,12 @@ export const PooCard = ({obj}) => {
                     );
                 })}
             </div>
+            <div className="ShowDate">
+                {new Date(obj.Time).toLocaleDateString("ja-JP",{
+                    hour:"2-digit",
+                    minute:"2-digit",
+                })}
+            </div>
         </div>
         </>
     );

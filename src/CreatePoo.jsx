@@ -18,7 +18,6 @@ export const CreatePoo = ({setModal}) => {
         await addDoc(collection(db, "poops"), {
             Poo:Poo,
             Time:d.getTime(),
-            date:d,
             author:{
                 username:auth.currentUser.displayName,
                 id:auth.currentUser.uid

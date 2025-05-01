@@ -39,9 +39,24 @@
     background-color: gray;
     border-radius: 20px;
     box-shadow: 0px 17px 25px -5px rgb(154, 111, 99);
- 
+   
 }
 .unkos:hover {
+    transform:translateY(-5px);
+    box-shadow: 0px 17px 25px -5px rgb(179, 95, 71);
+    transition:all 0.3s;
+}
+
+
+
+.unkos_super {
+    background-color: rgb(187, 81, 81);
+    border-radius: 20px;
+    box-shadow: 0px 17px 25px -5px rgb(234, 137, 110);
+    height:400px;
+    
+}
+.unkos_super:hover {
     transform:translateY(-5px);
     box-shadow: 0px 17px 25px -5px rgb(179, 95, 71);
     transition:all 0.3s;
