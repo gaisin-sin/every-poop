@@ -5,6 +5,7 @@ import { useState } from "react";
 import { auth, db } from "./firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import uuid from "react-uuid";
 export const CreatePoo = ({setModal}) => {
     const [inputText, setInput] = useState("");
 
@@ -21,7 +22,8 @@ export const CreatePoo = ({setModal}) => {
             author:{
                 username:auth.currentUser.displayName,
                 id:auth.currentUser.uid
-            }
+            },
+            pooid:uuid(),
         });
         setModal(false);
         navigate("/");

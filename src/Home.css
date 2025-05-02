@@ -10,24 +10,24 @@
 }
 .SideBar {
     height: 100vh;
-    flex:20%;
     display: flex;
     flex-direction: column;
     align-items: center;
     color:black;
     border-right:0.1px solid rgb(220, 209, 209);
-  
+    width:20%;
+    
 }
 .Viewer {
     display:flex;
     flex-direction: column;
     background-color: white;
-    width:100%;
+    width:80%;
 }
 
 .Titles {
     font-size:50px;
-    margin-left:30%;
+    margin-left:20%;
     margin-top:10px;
     flex:10%;
     display:flex;
@@ -64,6 +64,7 @@
 
 .PoopContainer {
     flex:90%;
+    margin-left:10px;
 }
 
 .mode, .ICON {
@@ -76,9 +77,10 @@
     box-shadow:0px 17px 25px -5px #777777;
     margin-bottom:30px;
 }
+
+
 .mode {
     font-weight:bold;
-   
     font-size:18px;
     width:100%;
     padding:20px 10px;
@@ -94,15 +96,15 @@
     transition: all 0.2s;
 }
 
+
 .mode-click {
     font-weight:bold;
-   
     font-size:18px;
     width:100%;
     padding:20px 10px;
     margin-top:0px;
     text-align: center;
-    background-color: rgb(179, 95, 71);;
+    background-color: rgb(179, 95, 71);
     border-radius:20px;
     margin-bottom:20px;
 }

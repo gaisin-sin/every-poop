@@ -7,6 +7,7 @@ import { CreatePoo } from "./CreatePoo";
 import { addDoc, collection, doc, getDocs, onSnapshot } from "firebase/firestore";
 import { auth, db } from "./firebase";
 import { PooCard } from "./PooCard";
+import uuid from "react-uuid";
 
 
 
@@ -36,6 +37,8 @@ export const Home = () => {
     const navigate = useNavigate();
 
 
+    const [logs, setLogs] = useState([]);
+
     
 
     useEffect(() => {
@@ -52,7 +55,17 @@ export const Home = () => {
         setShowPoo(alldata);
     }
 
+    const getLogs = async() => {
+        const data = await getDocs((collection(db, "logs")));
+        const alldata = (data.docs.map((doc) => ({...doc.data(), id:doc.id})));
+        setLogs(alldata);
+    }
+
     getPoo();
+    getLogs();
+
+    console.log("SIZE " + allPoo.length);
+
     onSnapshot(
         collection(db, "poops"), (data) => {
         data.docChanges().map((x) => {
@@ -73,6 +86,17 @@ export const Home = () => {
                     const news = [x.doc.data(), ...filtering].sort((a, b) => b.Time-a.Time);
                     return news;
                 });
+            }
+        })
+    });
+
+
+    onSnapshot(
+        collection(db, "logs"), (data) => {
+        data.docChanges().map((x) => {
+            if (x.type == "added") {
+                console.log("ADD LOG");
+                setLogs((dt) => [x.doc.data(), ...dt]);
             }
         })
     });
@@ -120,10 +144,13 @@ export const Home = () => {
                 author:{
                     username:auth.currentUser.displayName,
                     id:auth.currentUser.uid
-                }
+                },
+                pooid:uuid(),
             });
             setModal(false);
         }
+    
+
 
     const SUPERUNKO = () => {
         PooPost("排便成功💩✌")
@@ -131,6 +158,55 @@ export const Home = () => {
         console.log(text.split(""));
         setSuperUnko((<span className="unkos_super">💩</span>));
     }
+
+    //Log shori
+    const LogInc = async (userid, pooid) => {
+        const GETLOGS = async() => {
+            const data = await getDocs((collection(db, "logs")));
+            const alldata = (data.docs.map((doc) => ({...doc.data(), id:doc.id})));
+            return alldata;
+        }
+        let newlogs =  await  GETLOGS();
+        let ret = false;
+        newlogs.map((obj) => {
+            if (obj.userid == userid && obj.pooid == pooid) {
+                ret = true;
+            }
+        });
+        console.log("RET " + ret);
+        return ret;
+    }
+
+
+
+    const CountView = async (pooid) => {
+        const GETLOGS = async() => {
+            const data = await getDocs((collection(db, "logs")));
+            const alldata = (data.docs.map((doc) => ({...doc.data(), id:doc.id})));
+            return alldata;
+        }
+        let newlogs =  await  GETLOGS();
+        var userset = new Set();
+        newlogs.map((obj) =>  {
+            if (obj.pooid == pooid) {
+                userset.add(obj.userid);
+            }
+        });
+        return userset.size;
+    }
+    const createLog = async (userid, pooid) => {
+
+        console.log("CREATING");
+        const newobj = {
+            userid:userid,
+
+            pooid:pooid,
+        }
+        console.log("NEW ");
+        console.log(newobj);
+        await addDoc(collection(db, "logs"), newobj);
+    }
+
 
 
     return (
@@ -154,19 +230,17 @@ export const Home = () => {
         <div className="Container">
             <div className="SideBar">
                 <div className="ICON"><FontAwesomeIcon icon={faPoo} /></div>
-                <div  onClick={() => setMode(0)} className={"mode" + (nowMode==0 ? "-click" :  "")}>みんなのぷー</div>
+                <div onClick={() => setMode(0)} className={"mode" + (nowMode==0 ? "-click" :  "")}>みんなのぷー</div>
                 <div onClick={() => setMode(1)} className={"mode" + (nowMode==1 ? "-click" :  "")}>僕のぷー</div>
             </div>
             <div className="Viewer">
-
-                
                 <div className="Titles">
                 {superunko}{superunko}{superunko}
                 </div>
                 <div className="PoopContainer">
                     {(showPoo).map((obj) => {
                         return (
-                            <PooCard obj={obj} />
+                            <PooCard obj={obj} showPoo={showPoo} LogInc={LogInc} createLog={createLog} CountView={CountView} logs={logs}/>
                         );
                     })}
                 </div>
